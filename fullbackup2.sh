@@ -1,15 +1,9 @@
+( 
 # ============================================================
 # Резервная копия /overlay/upper + конфигурация через LuCI
 # Демон-наблюдатель + флаг-запрос + опрос статуса
 # ============================================================
 
-# --- 0. Уборка прошлых экспериментов ---
-/etc/init.d/backup-watcher stop 2>/dev/null
-/etc/init.d/backup-watcher disable 2>/dev/null
-kill $(pidof backup-watcher.sh) 2>/dev/null
-kill $(pidof backup-daemon.*.sh) 2>/dev/null
-rm -f /etc/init.d/backup-watcher /usr/bin/backup-watcher.sh
-rm -f /tmp/backup.request /tmp/backup-config.request /tmp/backup.pid /tmp/backup-daemon.*.sh
 
 
 # --- 1a. Скрипт полной архивации ---
@@ -418,3 +412,4 @@ chmod 644 /www/luci-static/resources/view/backup/backup-manager.js
 
 # --- 7. Перезапуск rpcd ---
 /etc/init.d/rpcd restart
+)
