@@ -4,12 +4,12 @@
 # Демон-наблюдатель + флаг-запрос + опрос статуса
 # ============================================================
 
-echo "ver 0.0.1"
+echo "ver 0.0.2"
 sleep 2
 
 
 # --- 1a. Скрипт полной архивации ---
-tee /usr/bin/backup-manager.sh > /dev/null << 'SCRIPT_EOF'
+cat > /usr/bin/backup-manager.sh << 'SCRIPT_EOF'
 #!/bin/sh
 # ============================================================
 # backup-manager.sh — полный архив /overlay/upper
@@ -80,7 +80,7 @@ chmod +x /usr/bin/backup-manager.sh
 
 
 # --- 1b. Скрипт сохранения только конфигурации ---
-tee /usr/bin/backup-config.sh > /dev/null << 'CONF_EOF'
+cat > /usr/bin/backup-config.sh << 'CONF_EOF'
 #!/bin/sh
 # ============================================================
 # backup-config.sh — только конфигурация через sysupgrade -b
@@ -132,7 +132,7 @@ chmod +x /usr/bin/backup-config.sh
 
 
 # --- 2. Демон-наблюдатель ---
-tee /usr/bin/backup-watcher.sh > /dev/null << 'WATCH_EOF'
+cat > /usr/bin/backup-watcher.sh << 'WATCH_EOF'
 #!/bin/sh
 # ============================================================
 # backup-watcher.sh — ждёт флаги и запускает нужный скрипт
@@ -179,7 +179,7 @@ chmod +x /usr/bin/backup-watcher.sh
 
 
 # --- 3. init-скрипт для демона ---
-tee /etc/init.d/backup-watcher > /dev/null << 'INIT_EOF'
+cat > /etc/init.d/backup-watcher << 'INIT_EOF'
 #!/bin/sh /etc/rc.common
 START=99
 STOP=10
@@ -199,7 +199,7 @@ chmod +x /etc/init.d/backup-watcher
 
 
 # --- 4. Меню LuCI ---
-tee /usr/share/luci/menu.d/luci-app-backup.json > /dev/null << 'MENU_EOF'
+cat > /usr/share/luci/menu.d/luci-app-backup.json << 'MENU_EOF'
 {
   "admin/services/backup-create": {
     "title": "Openwrt Full Backup 2",
@@ -219,7 +219,7 @@ chmod 644 /usr/share/luci/menu.d/luci-app-backup.json
 
 
 # --- 5. ACL ---
-tee /usr/share/rpcd/acl.d/luci-app-backup.json > /dev/null << 'ACL_EOF'
+cat > /usr/share/rpcd/acl.d/luci-app-backup.json << 'ACL_EOF'
 {
   "luci-app-backup": {
     "description": "Backup manager access",
@@ -245,7 +245,7 @@ chmod 644 /usr/share/rpcd/acl.d/luci-app-backup.json
 # --- 6. JS-страница ---
 mkdir -p /www/luci-static/resources/view/backup
 
-tee /www/luci-static/resources/view/backup/backup-manager.js > /dev/null << 'JS_EOF'
+cat > /www/luci-static/resources/view/backup/backup-manager.js << 'JS_EOF'
 'use strict';
 'require view';
 'require fs';
@@ -411,6 +411,9 @@ JS_EOF
 
 chmod 644 /www/luci-static/resources/view/backup/backup-manager.js
 
-
+echo
+echo "Установка завершена"
+echo "Запуск в Службы - OpenWRT Full Backup 2"
+echo
 # --- 7. Перезапуск rpcd ---
 /etc/init.d/rpcd restart
