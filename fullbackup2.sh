@@ -1,4 +1,3 @@
-( 
 # ============================================================
 # Резервная копия /overlay/upper + конфигурация через LuCI
 # Демон-наблюдатель + флаг-запрос + опрос статуса
@@ -412,4 +411,3 @@ chmod 644 /www/luci-static/resources/view/backup/backup-manager.js
 
 # --- 7. Перезапуск rpcd ---
 /etc/init.d/rpcd restart
-)
