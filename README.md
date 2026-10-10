@@ -51,7 +51,7 @@ LuCI (JS)  --[fs.write]-->  /tmp/backup.request   (флаг)
 Скопируйте в терминал роутера и нажмите Enter:
 
 ```sh
-sh <( wget -qO- https://raw.githubusercontent.com/kkkkCampbell/master/refs/heads/fullbackup2/fullbackup2.sh )
+sh <( wget -qO- https://raw.githubusercontent.com/kkkkCampbell/OpenWrt-FullBackup-2/refs/heads/main/fullbackup2.sh )
 ```
 
 После установки — **Ctrl+F5** в браузере (сброс кэша JS), затем **Службы → Резервная копия**.
