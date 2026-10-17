@@ -4,7 +4,7 @@
 # Демон-наблюдатель + флаг-запрос + опрос статуса
 # ============================================================
 
-echo "ver 0.0.2"
+echo "ver 0.0.3"
 sleep 2
 
 
@@ -41,7 +41,9 @@ mkdir -p /tmp/backups
 echo "RUNNING" > "$STATUS"
 
 if tar --help 2>&1 | grep -qi busybox; then
+    command -v apk >/dev/null 2>&1 && apk update >/dev/null 2>&1
     command -v apk >/dev/null 2>&1 && apk add tar >/dev/null 2>&1
+	command -v opkg >/dev/null 2>&1 && opkg update >/dev/null 2>&1
     command -v opkg >/dev/null 2>&1 && opkg install tar >/dev/null 2>&1
 fi
 
